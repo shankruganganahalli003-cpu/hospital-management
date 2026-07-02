@@ -14,7 +14,7 @@ const cors = require("cors");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.use(
   cors({
@@ -27,6 +27,7 @@ app.use(
     crossOriginOpenerPolicy: false,
   })
 );
+
 
 
 app.use("/api/verify", emailRouter);
