@@ -6,49 +6,41 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 exports.googleLogin = async (req, res) => {
   try {
-    console.log("Request Body:", req.body);
-
-    const { token, role } = req.body;
+    const { token,role } = req.body;
 
     if (!token) {
       return res.status(400).json({ error: "Token missing" });
     }
-
     if (!role) {
-      return res.status(400).json({ error: "Role is required" });
+      return res.status(400).json({ error: "role missing" });
     }
 
-    console.log("Verifying token...");
 
     const ticket = await client.verifyIdToken({
       idToken: token,
       audience: process.env.GOOGLE_CLIENT_ID,
     });
 
-    console.log("Token verified");
-
     const payload = ticket.getPayload();
 
-    console.log("Payload:", payload);
+    if (!payload?.email) {
+      return res.status(401).json({ error: "Invalid Google token" });
+    }
 
     let user = await User.findOne({ email: payload.email });
-
-    console.log("User:", user);
 
     if (!user) {
       user = await User.create({
         name: payload.name,
         email: payload.email,
         googleId: payload.sub,
-        profileImage: payload.picture,
-        role,
+        picture: payload.picture,
+        role:role
       });
-
-      console.log("User created");
-    } else {
-      user.role = role;
+    }else{
+      user.role=role;
       await user.save();
-      console.log("User updated");
+
     }
 
     const jwtToken = jwt.sign(
@@ -68,14 +60,10 @@ exports.googleLogin = async (req, res) => {
       success: true,
       user,
     });
-
   } catch (err) {
-  console.error("========== GOOGLE LOGIN ERROR ==========");
-  console.error(err);
-
-  return res.status(401).json({
-    error: err.message,
-    stack: err.stack,
-  });
-}
+    console.log("OAuth error:", err.message);
+    return res.status(401).json({ error: "Google login failed" });
+  }
 };
+
+

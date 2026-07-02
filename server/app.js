@@ -4,9 +4,7 @@ require("dotenv").config();
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
 const emailRouter = require("./routes/emailroute");
-const helmet = require("helmet");
 const authrouter = require("./routes/authroute");
-const path = require("path");
 const cors = require("cors");
 
 
@@ -14,20 +12,15 @@ const cors = require("cors");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "../client/dist")));
+
 
 app.use(
   cors({
-    origin: "https://hospital-management-2-rg9j.onrender.com", 
+    origin: "http://localhost:5173", 
     credentials: true,
   })
 );
-app.use(
-  helmet({
-    crossOriginOpenerPolicy: false,
-  })
-);
-
+  
 
 
 app.use("/api/verify", emailRouter);

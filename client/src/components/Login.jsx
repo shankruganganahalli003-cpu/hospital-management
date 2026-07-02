@@ -8,6 +8,7 @@ import { setCredentials } from "../redux/authSlice";
 
 const Login = () => {
   const [role, setRole] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const Login = () => {
         return;
       }
 
+      setLoading(true);
 
       const { data } = await api.post(
         "/auth/google-login",
@@ -33,13 +35,14 @@ const Login = () => {
           token,
           role,
         },
-        
+        {
+          withCredentials: true, // IMPORTANT for cookies
+        }
       );
 
       dispatch(setCredentials({ user: data.user }));
 
       toast.success(data.message || "Login Successful");
-      console.log(data);
 
       navigate("/");
     } catch (error) {
@@ -50,17 +53,21 @@ const Login = () => {
           error.response?.data?.error ||
           "Login Failed"
       );
-    } 
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="flex  items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-xl p-8 w-full items-center justify-center">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
+
         <h1 className="text-3xl font-bold text-center mb-6">
           Google Login
         </h1>
 
-        <div className="mb-5 items-center justify-center flex flex-col">
+        {/* Role Selection */}
+        <div className="mb-5">
           <label className="block mb-2 font-semibold">
             Select Role
           </label>
@@ -68,7 +75,7 @@ const Login = () => {
           <select
             value={role}
             onChange={(e) => setRole(e.target.value)}
-            className="w-100 border rounded-lg p-3"
+            className="w-full border rounded-lg p-3"
           >
             <option value="">Select Role</option>
             <option value="patient">Patient</option>
@@ -77,6 +84,7 @@ const Login = () => {
           </select>
         </div>
 
+        {/* Google Login */}
         <div className="flex justify-center">
           <GoogleLogin
             onSuccess={handleLogin}
@@ -84,11 +92,24 @@ const Login = () => {
           />
         </div>
 
-        <div className="text-xl font-bold w-full flex items-center justify-center">
-          <h1 className="">If you don't have an account then <span className="text-blue-600 hover:underline"><a href="/register">Register</a></span></h1>
+        {/* Register Link */}
+        <div className="text-center mt-6">
+          <p className="text-sm">
+            Don’t have an account?{" "}
+            <a
+              href="/register"
+              className="text-blue-600 hover:underline"
+            >
+              Register
+            </a>
+          </p>
         </div>
 
-     
+        {loading && (
+          <p className="text-center mt-4 text-gray-500">
+            Logging in...
+          </p>
+        )}
       </div>
     </div>
   );
