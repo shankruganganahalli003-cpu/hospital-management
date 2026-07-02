@@ -12,6 +12,7 @@ const cors = require("cors");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "dist")));
 
 app.use(
   cors({
@@ -19,6 +20,12 @@ app.use(
     credentials: true,
   })
 );
+
+
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 
 app.use("/api/verify", emailRouter);
 app.use("/api/auth",authrouter);
