@@ -4,6 +4,7 @@ require("dotenv").config();
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
 const emailRouter = require("./routes/emailroute");
+const helmet = require("helmet");
 const authrouter = require("./routes/authroute");
 const path = require("path");
 const cors = require("cors");
