@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // React/Vite frontend URL
+    origin: "https://hospital-management-2-rg9j.onrender.com", 
     credentials: true,
   })
 );

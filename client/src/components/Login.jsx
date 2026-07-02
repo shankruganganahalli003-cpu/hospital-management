@@ -3,7 +3,6 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import axios from "axios";
 import api from "../api/axios";
 import { setCredentials } from "../redux/authSlice";
 
@@ -27,7 +26,7 @@ const Login = () => {
         return;
       }
 
-      
+
       const { data } = await api.post(
         "/auth/google-login",
         {
