@@ -62,9 +62,11 @@ exports.googleLogin = async (req, res) => {
       user,
     });
   } catch (err) {
-    console.log("OAuth error:", err.message);
-    return res.status(401).json({ error: "Google login failed" });
-  }
+  console.log("OAuth error:", err.message);
+  return res.status(401).json({
+    error: "Google login failed",
+  });
+}
 };
 
 
