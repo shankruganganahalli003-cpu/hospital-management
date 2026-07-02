@@ -4,7 +4,6 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import axios from "axios";
 import { setCredentials } from "../redux/authSlice";
 
 const Register = () => {
