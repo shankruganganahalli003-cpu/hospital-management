@@ -12,7 +12,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// SEND EMAIL
 const sendEmail = async (email, subject, message) => {
   return transporter.sendMail({
     from: process.env.MY_EMAIL,
@@ -22,12 +21,10 @@ const sendEmail = async (email, subject, message) => {
   });
 };
 
-// GENERATE OTP
 const generateOTP = () => {
   return crypto.randomInt(100000, 999999).toString();
 };
 
-// ✅ export both properly
 module.exports = {
   sendEmail,
   generateOTP,

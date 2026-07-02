@@ -11,10 +11,6 @@ exports.googleLogin = async (req, res) => {
     if (!token) {
       return res.status(400).json({ error: "Token missing" });
     }
-    if (!role) {
-      return res.status(400).json({ error: "role missing" });
-    }
-
 
     const ticket = await client.verifyIdToken({
       idToken: token,
@@ -30,17 +26,13 @@ exports.googleLogin = async (req, res) => {
     let user = await User.findOne({ email: payload.email });
 
     if (!user) {
-      user = await User.create({
-        name: payload.name,
-        email: payload.email,
-        googleId: payload.sub,
-        picture: payload.picture,
-        role:role
-      });
-    }else{
-      user.role=role;
-      await user.save();
-
+     user = await User.create({
+  name: payload.name,
+  email: payload.email,
+  googleId: payload.sub,
+  picture: payload.picture,
+  role:"patient"
+});
     }
 
     const jwtToken = jwt.sign(
@@ -56,8 +48,9 @@ exports.googleLogin = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    return res.json({
+    return res.status(200).json({
       success: true,
+      message: "Google Login successfull",
       user,
     });
   } catch (err) {
@@ -65,5 +58,3 @@ exports.googleLogin = async (req, res) => {
     return res.status(401).json({ error: "Google login failed" });
   }
 };
-
-

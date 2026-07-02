@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Home from "./components/Home";
+import Otpvarify from "./components/Otpvarify";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/otp-verify" element={<Otpvarify />} />
          <Route path="/" element={<Home />} />
         {/* Protected Routes */}   
         <Route element={<ProtectedRoute />}>

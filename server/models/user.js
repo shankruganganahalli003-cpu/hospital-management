@@ -17,16 +17,11 @@ const userschema = new mongoose.Schema({
     type: String,
     default: null,
   },
-
-  phone: {
-    type: String,
-    default: "",
-  },
-
+  
  role: {
   type: String,
   enum: ["admin", "doctor", "patient", "nurse"],
-  default: "patient"
+  defaut:"patient"
 },
 
   profileImage: {
