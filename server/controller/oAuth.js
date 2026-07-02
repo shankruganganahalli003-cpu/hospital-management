@@ -64,10 +64,12 @@ exports.googleLogin = async (req, res) => {
     });
 
   } catch (err) {
-    console.error("FULL ERROR:");
-    console.error(err);
-    return res.status(401).json({
-      error: err.message,
-    });
-  }
+  console.error("========== GOOGLE LOGIN ERROR ==========");
+  console.error(err);
+
+  return res.status(401).json({
+    error: err.message,
+    stack: err.stack,
+  });
+}
 };
