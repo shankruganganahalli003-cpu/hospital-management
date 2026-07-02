@@ -21,6 +21,11 @@ app.use(
     credentials: true,
   })
 );
+app.use(
+  helmet({
+    crossOriginOpenerPolicy: false,
+  })
+);
 
 
 app.use("/api/verify", emailRouter);
