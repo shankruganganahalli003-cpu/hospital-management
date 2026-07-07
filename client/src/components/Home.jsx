@@ -1,12 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div
       className="min-h-screen bg-cover bg-center bg-no-repeat relative overflow-hidden"
       style={{
         backgroundImage:
-          "linear-gradient(135deg, rgba(2, 6, 23, 0.38), rgba(2, 6, 23, 0.72)), url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1600&q=80')",
+          "linear-gradient(135deg, rgba(2, 6, 23, 0.38), rgba(2, 6, 23, 0.72)), url('https://images.unsplash.com/photo-1580281657527-47f249e8f7f4?auto=format&fit=crop&w=1600&q=80')",
       }}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.20),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.20),transparent_32%)]"></div>
@@ -17,7 +20,7 @@ const Home = () => {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 backdrop-blur-2xl mb-6 shadow-lg shadow-cyan-500/10">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
               <span className="text-sm font-medium tracking-wide">
-                Hospital Management System
+                Online Doctor Appointment Booking
               </span>
             </div>
 
@@ -29,25 +32,38 @@ const Home = () => {
             </h1>
 
             <p className="mt-6 text-lg md:text-xl text-slate-100/95 max-w-2xl leading-relaxed">
-              A modern hospital management portal designed for patient care,
-              appointments, records, billing, and staff coordination — with a
-              clean, trusted, and professional experience.
+              A smart hospital portal where patients can view doctors, book
+              appointments online, and manage visits easily. It helps reduce
+              waiting time, improves hospital efficiency, and gives patients a
+              simple digital healthcare experience.
+            </p>
+
+            <p className="mt-4 text-base text-slate-200/90 max-w-2xl leading-relaxed">
+              Patients can check available doctors, choose a convenient time
+              slot, and visit the hospital without unnecessary crowding or long
+              queues.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <button className="px-7 py-3.5 rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]">
-                Get Started
+              <button
+                onClick={() => navigate("/Lists")}
+                className="px-7 py-3.5 rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]"
+              >
+                Book Appointment
               </button>
-              <button className="px-7 py-3.5 rounded-2xl bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/15 transition backdrop-blur-2xl">
-                Learn More
+              <button
+                onClick={() => navigate("/doctors")}
+                className="px-7 py-3.5 rounded-2xl bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/15 transition backdrop-blur-2xl"
+              >
+                View Doctors
               </button>
             </div>
 
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
               {[
-                ["Patient Care", "24/7 support"],
-                ["Appointments", "Easy booking"],
-                ["Records", "Secure access"],
+                ["Doctors", "Available specialists"],
+                ["Appointments", "Easy online booking"],
+                ["Waiting Time", "Reduced crowding"],
               ].map(([title, desc]) => (
                 <div
                   key={title}

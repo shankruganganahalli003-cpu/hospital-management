@@ -1,33 +1,29 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 const images = [
   {
-    src: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/d2ec14d40ef1a6f9c5c314eb5ee8b1703807ae3e.jpg",
-    title: "Certificate",
-    desc: "Official medical and clinical documentation.",
+    src: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1a?auto=format&fit=crop&w=1600&q=80",
+    title: "Doctor Consultation",
+    desc: "Patients can view doctors and book appointments online.",
   },
   {
-    src: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/0e2e6efc5d9120390700fdfb99aa6b402b96ec01.jpg",
-    title: "Nurse Care",
-    desc: "Compassionate support from trained healthcare staff.",
+    src: "https://images.unsplash.com/photo-1576765607924-3f7b8410b7d2?auto=format&fit=crop&w=1600&q=80",
+    title: "Nurse Support",
+    desc: "Compassionate care from trained hospital staff.",
   },
   {
-    src: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/573a347f3bae6235915c4a16db4b07d419fd945d.jpg",
-    title: "Surgeries",
-    desc: "Safe and modern surgical procedures with expert teams.",
+    src: "https://images.unsplash.com/photo-1580281657527-47f249e8f7f4?auto=format&fit=crop&w=1600&q=80",
+    title: "Appointment Booking",
+    desc: "Easy online appointment scheduling for patients.",
   },
   {
-    src: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1600&q=80",
-    title: "Hospital",
-    desc: "Modern structure with advanced facilities.",
+    src: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1600&q=80",
+    title: "Modern Hospital",
+    desc: "A clean and professional healthcare environment.",
   },
 ];
-
- 
-
 const About = () => {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -66,54 +62,57 @@ const About = () => {
               </div>
 
               <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                Care you can trust,
-                <span className="block text-cyan-300">healthcare you can rely on</span>
+                Care made simple,
+                <span className="block text-cyan-300">
+                  appointments made easy
+                </span>
               </h1>
 
               <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-2xl">
-                HealthCare+ is a multispeciality hospital designed to deliver complete
-                healthcare under one roof. We combine consultation, diagnosis,
-                treatment, surgery support, nursing care, and medical documentation in
-                one seamless patient experience.
+                HealthCare+ is a hospital appointment booking platform that helps
+                patients view doctors, book slots online, and manage visits without
+                long waiting times.
               </p>
 
               <p className="mt-4 text-lg text-slate-300 leading-relaxed max-w-2xl">
-                Our approach is built around compassion, safety, and clarity. From the
-                first visit to recovery and follow-up, we ensure patients feel informed,
-                supported, and cared for at every step.
+                Our goal is to make healthcare faster, more organized, and more
+                accessible for both patients and hospital staff.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
-                <button className="px-6 py-3 rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-lg shadow-cyan-500/20">
-                  Book Appointment
-                </button>
-              <button
-  onClick={() => navigate("/contact")}
-  className="px-6 py-3 hover:cursor-pointer w-50 rounded-2xl bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/15 transition"
+               <button
+  onClick={() => navigate("/Lists")}
+  className="px-6 py-3 rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-lg shadow-cyan-500/20"
 >
-  Contact us
+  Book Appointment
 </button>
+                <button
+                  onClick={() => navigate("/contact")}
+                  className="px-6 py-3 rounded-2xl bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/15 transition"
+                >
+                  Contact Us
+                </button>
               </div>
             </div>
 
             <div className="rounded-3xl bg-white/10 border border-white/15 backdrop-blur-xl p-5 shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1600&q=80"
+                src="https://images.unsplash.com/photo-1580281657527-47f249e8f7f4?auto=format&fit=crop&w=1600&q=80"
                 alt="Hospital"
                 className="w-full h-[420px] object-cover rounded-2xl"
               />
               <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-300">
                 <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
-                  Multispeciality support
+                  Online booking
                 </div>
                 <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
-                  Modern facilities
+                  Doctor listings
                 </div>
                 <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
-                  Skilled nurses
+                  Patient records
                 </div>
                 <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
-                  Safe procedures
+                  Reduced waiting time
                 </div>
               </div>
             </div>
@@ -145,21 +144,21 @@ const About = () => {
             <h2 className="text-3xl font-bold text-white">What we offer</h2>
             <div className="mt-6 grid md:grid-cols-3 gap-4">
               <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
-                <p className="font-semibold text-white">Multispeciality care</p>
+                <p className="font-semibold text-white">Doctor appointment booking</p>
                 <p className="mt-2 text-slate-300 text-sm">
-                  Multiple departments working together for complete treatment.
+                  Patients can book available slots online easily.
                 </p>
               </div>
               <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
-                <p className="font-semibold text-white">Skilled professionals</p>
+                <p className="font-semibold text-white">Hospital management</p>
                 <p className="mt-2 text-slate-300 text-sm">
-                  Doctors, surgeons, nurses, and support teams focused on patient care.
+                  Admins can manage doctors, patients, and appointments.
                 </p>
               </div>
               <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
-                <p className="font-semibold text-white">Reliable support</p>
+                <p className="font-semibold text-white">Faster service</p>
                 <p className="mt-2 text-slate-300 text-sm">
-                  Treatment guidance, records, certificates, and recovery support.
+                  Online scheduling helps reduce waiting time and crowding.
                 </p>
               </div>
             </div>

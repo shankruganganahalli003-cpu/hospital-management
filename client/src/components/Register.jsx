@@ -58,7 +58,6 @@ const handleSubmit = async (e) => {
 };
 
 
-
   const sendEmail = async () => {
     try {
 
@@ -69,8 +68,6 @@ const handleSubmit = async (e) => {
 
       }
 
-
-      
     } catch (err) {
       console.log(err.message);
       toast.error(err?.response?.data?.message);
@@ -135,7 +132,7 @@ const handleSubmit = async (e) => {
         <div className="flex justify-center items-center p-8 bg-white">
           <div className="w-full max-w-md flex flex-col justify-between h-full space-y-5">
             <div className="text-center">
-              <div className="inline-flex p-3.5 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 shadow-md">
+              <div className="inline-flex p-3.5 rounded-full bg-linear-to-r from-blue-600 to-cyan-500 shadow-md">
                 <FaHospital className="text-white text-3xl" />
               </div>
               <h2 className="text-2xl font-bold mt-2 text-gray-800">

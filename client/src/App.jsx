@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Otpvarify from "./components/Otpvarify";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import PatientCreate from "./pages/PatientCreate";
 
 const App = () => {
   return (
@@ -24,8 +25,8 @@ const App = () => {
          <Route path="/about" element={<About/>}/>
 
         {/* Protected Routes */}   
-        <Route element={<ProtectedRoute />}>
-         
+        <Route element={<ProtectedRoute allowedRoles={["receptionist"]} />}>
+         <Route path="patientManagement" element={<PatientCreate/>} />
         </Route>
       </Routes>
     </>

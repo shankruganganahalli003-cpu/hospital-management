@@ -5,7 +5,7 @@ const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
 const emailRouter = require("./routes/emailroute");
 const authrouter = require("./routes/authroute");
-const patientRouter = require("./routes/patientroute");
+const doctorrouter = require("./routes/doctorroute");
 const cors = require("cors");
 
 
@@ -26,7 +26,7 @@ app.use(
 
 app.use("/api/verify", emailRouter);
 app.use("/api/auth",authrouter);
-app.use("/api/patient",patientRouter);
+app.use("/api/doctor",doctorrouter);
 
 const port = process.env.PORT || 3000;
 

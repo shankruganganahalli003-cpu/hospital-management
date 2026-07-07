@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
 
 const Contact = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-slate-950 text-white">
       <section className="relative overflow-hidden">
@@ -20,10 +23,25 @@ const Contact = () => {
             </h1>
 
             <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-2xl">
-              Reach out to our hospital team for appointments, patient assistance,
-              medical guidance, or general inquiries. We are here to help you with
-              quick and reliable support.
+              Reach out to our hospital team for doctor appointments, patient support,
+              and general inquiries. We help patients book visits quickly and get the
+              care they need without long waiting times.
             </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={() => navigate("/Lists")}
+                className="px-6 py-3 rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-lg shadow-cyan-500/20"
+              >
+                Book Appointment
+              </button>
+              <button
+                onClick={() => navigate("/about")}
+                className="px-6 py-3 rounded-2xl bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/15 transition"
+              >
+                About Us
+              </button>
+            </div>
           </div>
 
           <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -33,7 +51,7 @@ const Contact = () => {
               </div>
               <h3 className="mt-4 text-xl font-semibold">Phone</h3>
               <p className="mt-2 text-slate-300 text-sm">
-                Call us for quick assistance and appointments.
+                Call us for quick help and appointment booking.
               </p>
               <p className="mt-3 text-white font-medium">+91 00000 00000</p>
             </div>
