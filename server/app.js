@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const emailRouter = require("./routes/emailroute");
 const authrouter = require("./routes/authroute");
 const doctorrouter = require("./routes/doctorroute");
+const slotRouter = require("./routes/slotroutre");
 const cors = require("cors");
 
 
@@ -27,6 +28,7 @@ app.use(
 app.use("/api/verify", emailRouter);
 app.use("/api/auth",authrouter);
 app.use("/api/doctor",doctorrouter);
+app.use("/api/slot",slotRouter);
 
 const port = process.env.PORT || 3000;
 

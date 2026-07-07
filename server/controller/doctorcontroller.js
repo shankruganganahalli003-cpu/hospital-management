@@ -63,7 +63,7 @@ module.exports.getall = async (req,res)=>{
     try {
         
         const getall = await doctormodel.find();
-        return res.json({getall});
+        return res.json({success:true,getall});
 
 
     } catch (err) {

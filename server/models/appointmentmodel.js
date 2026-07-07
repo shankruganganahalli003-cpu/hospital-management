@@ -25,6 +25,10 @@ const appointmentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    durationMinutes:{
+      type:String,
+      required:true
+    },
     reason: {
       type: String,
       default: "",

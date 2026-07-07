@@ -9,6 +9,7 @@ import Otpvarify from "./components/Otpvarify";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import PatientCreate from "./pages/PatientCreate";
+import AllDoctors from "./pages/AllDoctors";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
          <Route path="/" element={<Home />} />
          <Route path="/contact" element={<Contact />} />
          <Route path="/about" element={<About/>}/>
+         <Route path="/allDoctors" element={<AllDoctors/>}/>
 
         {/* Protected Routes */}   
         <Route element={<ProtectedRoute allowedRoles={["receptionist"]} />}>
