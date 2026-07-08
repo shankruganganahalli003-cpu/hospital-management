@@ -15,14 +15,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+const corsOptions = {
+  origin: "https://hospital-management-2-rg9j.onrender.com",
+  credentials: true,
+};
 
-app.use(
-  cors({
-    origin: "https://hospital-management-2-rg9j.onrender.com", 
-    credentials: true,
-  })
-);
-  
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 
 app.use("/api/verify", emailRouter);
