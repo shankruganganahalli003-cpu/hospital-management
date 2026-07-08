@@ -17,21 +17,13 @@ const appointmentSchema = new mongoose.Schema(
       ref: "Slot",
       default: null,
     },
-    appointmentDate: {
-      type: Date,
-      required: true,
-    },
-    appointmentTime: {
-      type: String,
-      required: true,
-    },
     durationMinutes:{
       type:String,
       required:true
     },
-    reason: {
-      type: String,
-      default: "",
+    availableDays:{
+      type:String,
+      required:true
     },
     status: {
       type: String,

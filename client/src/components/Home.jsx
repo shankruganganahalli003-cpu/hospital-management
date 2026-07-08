@@ -46,17 +46,12 @@ const Home = () => {
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <button
-                onClick={() => navigate("/Lists")}
+                onClick={() => navigate("/allDoctors")}
                 className="px-7 py-3.5 rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]"
               >
                 Book Appointment
               </button>
-              <button
-                onClick={() => navigate("/doctors")}
-                className="px-7 py-3.5 rounded-2xl bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/15 transition backdrop-blur-2xl"
-              >
-                View Doctors
-              </button>
+             
             </div>
 
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">

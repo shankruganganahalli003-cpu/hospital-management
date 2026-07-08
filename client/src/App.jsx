@@ -8,8 +8,8 @@ import Home from "./components/Home";
 import Otpvarify from "./components/Otpvarify";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import PatientCreate from "./pages/PatientCreate";
 import AllDoctors from "./pages/AllDoctors";
+import SlotBooking from "./pages/SlotBooking";
 
 const App = () => {
   return (
@@ -27,8 +27,9 @@ const App = () => {
          <Route path="/allDoctors" element={<AllDoctors/>}/>
 
         {/* Protected Routes */}   
-        <Route element={<ProtectedRoute allowedRoles={["receptionist"]} />}>
-         <Route path="patientManagement" element={<PatientCreate/>} />
+        <Route element={<ProtectedRoute/>}>
+
+         <Route path="/slot/:id" element={<SlotBooking/>} />
         </Route>
       </Routes>
     </>

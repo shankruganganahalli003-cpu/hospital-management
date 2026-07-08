@@ -4,7 +4,8 @@ const slotmodel = require("../models/slotmodel");
 module.exports.create = async (req,res) => {
     try {
 
-        const {doctorId,date,time} =req.body;
+        const {date,time} =req.body;
+        const doctorId = req.params;
 
         if(!date || !time){
             return res.status(400).json({message:"please select Date and Time"});
