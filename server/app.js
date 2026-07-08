@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:5173", 
+    origin: "https://hospital-management-2-rg9j.onrender.com", 
     credentials: true,
   })
 );
