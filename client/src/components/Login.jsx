@@ -3,7 +3,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { FaEnvelope, FaLock, FaHospital, FaCheckCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { toast } from "react-hot-toast";
+import toast from "react-hot-toast";
 import api from "../api/axios";
 import { setCredentials } from "../redux/authSlice";
 
@@ -30,7 +30,7 @@ const Login = () => {
     try {
       setLoading(true);
 
-      const { data } = await api.post("/auth/login", form, {
+      const { data } = await api.post("/api/auth/login", form, {
         withCredentials: true,
       });
 
@@ -38,7 +38,7 @@ const Login = () => {
       toast.success(data.message || "Login successful!");
       navigate("/");
     } catch (err) {
-      toast.error(err.response?.data?.message || "Login failed");
+      toast.error(err?.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -55,7 +55,7 @@ const Login = () => {
       setLoading(true);
 
       const { data } = await api.post(
-        "/auth/google-login",
+        "/api/auth/google-login",
         { token },
         { withCredentials: true }
       );
@@ -64,7 +64,7 @@ const Login = () => {
       toast.success(data.message || "Login successful!");
       navigate("/");
     } catch (err) {
-      toast.error(err.response?.data?.message || "Google login failed");
+      toast.error(err?.response?.data?.message || "Google login failed");
     } finally {
       setLoading(false);
     }
@@ -170,12 +170,10 @@ const Login = () => {
             </div>
 
             <div className="flex flex-col items-center gap-3">
-              <div className="h-9 overflow-hidden flex items-center justify-center">
-                <GoogleLogin
-                  onSuccess={handleGoogleLogin}
-                  onError={() => toast.error("Google login failed")}
-                />
-              </div>
+              <GoogleLogin
+                onSuccess={handleGoogleLogin}
+                onError={() => toast.error("Google login failed")}
+              />
 
               <p className="text-center text-xs text-gray-600">
                 Don't have an account?
