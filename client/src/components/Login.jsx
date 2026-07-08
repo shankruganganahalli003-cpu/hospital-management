@@ -33,8 +33,9 @@ const Login = () => {
       const { data } = await api.post("/api/auth/login", form, {
         withCredentials: true,
       });
-
-      dispatch(setCredentials({ user: data.user }));
+if (data?.user) {
+  dispatch(setCredentials({ user: data.user }));
+}
       toast.success(data.message || "Login successful!");
       navigate("/");
     } catch (err) {
