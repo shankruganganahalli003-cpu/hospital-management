@@ -18,11 +18,11 @@ const slotSchema = new mongoose.Schema(
         type:Boolean,
         default:false
     },
-    // appointmentId: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "Appointment",
-    //   default: null,
-    // },
+    appointmentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Appointment",
+      default: null,
+    },
   },
   { timestamps: true }
 );

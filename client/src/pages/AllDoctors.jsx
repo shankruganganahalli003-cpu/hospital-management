@@ -97,7 +97,7 @@ const AllDoctors = () => {
 
                 <button
                   className="mt-6 w-full rounded-2xl bg-gradient-to-r from-indigo-600 to-blue-600 px-4 py-3 font-semibold text-white shadow-md transition hover:from-indigo-700 hover:to-blue-700"
-                  onClick={() => {navigate(`/slot/${d._id}`)}}
+                  onClick={() => {navigate(`//${d._id}`)}}
                 >
                   Book Appointment
                 </button>

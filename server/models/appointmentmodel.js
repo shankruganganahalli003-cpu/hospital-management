@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const appointmentSchema = new mongoose.Schema(
   {
@@ -8,33 +8,28 @@ const appointmentSchema = new mongoose.Schema(
       required: true,
     },
     doctorId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Doctor",
+      type:String,
       required: true,
     },
-    slotId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Slot",
-      default: null,
-    },
+    
     durationMinutes:{
       type:String,
       required:true
     },
     availableDays:{
+      type:[String],
+      required:true
+    },
+    morningTime:{
       type:String,
       required:true
     },
-    status: {
-      type: String,
-      enum: ["pending", "confirmed", "cancelled", "completed"],
-      default: "pending",
+
+    eveningTime:{
+      type:String,
+      required:true
     },
-    paymentStatus: {
-      type: String,
-      enum: ["pending", "paid", "failed", "refunded"],
-      default: "pending",
-    },
+
     amount: {
       type: Number,
       required: true,

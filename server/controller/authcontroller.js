@@ -43,7 +43,9 @@ module.exports.register = async (req, res) => {
     console.log(err.message);
     return res.status(500).json({ message: "Internal Server Error" });
   }
-};module.exports.login = async (req, res) => {
+};
+
+module.exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 

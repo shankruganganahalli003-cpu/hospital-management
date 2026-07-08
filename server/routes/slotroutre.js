@@ -4,7 +4,7 @@ const isAuth = require("../middleware/isauth");
 const router = express.Router();
 
 
-router.post("/create/:doctorId",isAuth,create);
+router.post("/create/:appointmentId",isAuth,create);
 router.get("/getall",isAuth,getall);
 
 

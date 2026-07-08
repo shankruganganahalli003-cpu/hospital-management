@@ -5,14 +5,14 @@ module.exports.create = async (req,res) => {
     try {
 
         const {date,time} =req.body;
-        const doctorId = req.params;
+        const appointmentId = req.params;
 
         if(!date || !time){
             return res.status(400).json({message:"please select Date and Time"});
         }
 
        const isBooked = await slotmodel.findOne({
-  doctorId,
+ appointmentId,
   date: new Date(date),
   time,
 });
@@ -22,7 +22,7 @@ module.exports.create = async (req,res) => {
 }
            
         const createSlot = await slotmodel.create({
-                doctorId,date,time,isBooked:true
+                appointmentId,date,time,isBooked:true
             });
 
         return res.status(200).json({message:"Booked Successfully",createSlot});

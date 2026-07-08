@@ -10,7 +10,6 @@ module.exports.create = async (req, res) => {
       specialization,
       experience,
       feesPerConsultation,
-      timings,
       about,
       address,
       image,
@@ -21,7 +20,6 @@ module.exports.create = async (req, res) => {
       !specialization ||
       experience === undefined ||
       feesPerConsultation === undefined ||
-      !timings ||
       !about ||
       !image
     ) {
@@ -40,16 +38,16 @@ module.exports.create = async (req, res) => {
       specialization,
       experience,
       feesPerConsultation,
-      timings,
       about,
       address,
       image,
     });
 
-    return res.status(201).json({
-      message: "Doctor created successfully",
-      doctor,
-    });
+ return res.status(201).json({
+  success: true,
+  message: "Doctor created successfully",
+  doctor,
+});
   } catch (err) {
     console.log(err.message);
     return res.status(500).json({
@@ -67,18 +65,21 @@ module.exports.getall = async (req,res)=>{
 
 
     } catch (err) {
-        console.log(err.message);
-
-    }
+    console.log(err.message);
+    return res.status(500).json({
+      message: "Server error",
+      error: err.message,
+    });
+  }
 };
 
 
 module.exports.update = async (req,res)=>{
     try {
         const {id} = req.params;
-        const {fullName,specialization,experience,feesPerConsultation,timings,about,address,image} = req.body;
+        const {fullName,specialization,experience,feesPerConsultation,about,address,image} = req.body;
 
-        const update = await doctormodel.findByIdAndUpdate(id,{fullName,specialization,experience,feesPerConsultation,timings,about,address,image},{new:true});
+        const update = await doctormodel.findByIdAndUpdate(id,{fullName,specialization,experience,feesPerConsultation,about,address,image},{new:true});
 
         return res.json({update});
     } catch (err) {
@@ -95,7 +96,36 @@ module.exports.deletedoctor = async (req,res)=>{
         return res.json({deleteDoctor});
         
     } catch (err) {
-        console.log(err.message);
-    }
+    console.log(err.message);
+    return res.status(500).json({
+      message: "Server error",
+      error: err.message,
+    });
+  }
 }
+module.exports.getme = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const getme = await doctormodel.find({ userId });
 
+    if (!getme) {
+      return res.status(404).json({
+        success: false,
+        message: "Doctor profile not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Fetched successfully",
+      getme,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: err.message,
+    });
+  }
+};

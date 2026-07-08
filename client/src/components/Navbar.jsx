@@ -20,13 +20,28 @@ const Navbar = () => {
     setMenuOpen(false);
   };
 
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Doctors", path: "/allDoctors" },
-    { name: "Contact", path: "/contact" },
+const commonLinks = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Contact", path: "/contact" },
+];
+
+const doctorLinks = [
+  { name: "Dashboard", path: "/doctor/dashboard" },
+  { name: "Appointments", path: "/doctor/appointments" },
   
-  ];
+];
+
+const patientLinks = [
+  { name: "My Appointments", path: "/patient/appointments" },
+  { name: "Doctors", path: "/allDoctors" },
+];
+
+const navLinks = [
+  ...commonLinks,
+  ...(user?.role === "doctor" ? doctorLinks : []),
+  ...(user?.role === "patient" ? patientLinks : []),
+];
 
   const linkClass = ({ isActive }) =>
     [
@@ -71,7 +86,7 @@ const Navbar = () => {
                 <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 border border-white/10">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
                   <span className="text-sm text-slate-200 capitalize">
-                    {user.role || "User"}
+                    {user.role}
                   </span>
                 </div>
                 <button
@@ -84,7 +99,7 @@ const Navbar = () => {
             ) : (
               <button
                 onClick={() => navigate("/register")}
-                className="px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium hover:opacity-90 transition shadow-md shadow-blue-500/20"
+                className="px-5 py-2 rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 text-white font-medium hover:opacity-90 transition shadow-md shadow-blue-500/20"
               >
                 Sign Up
               </button>

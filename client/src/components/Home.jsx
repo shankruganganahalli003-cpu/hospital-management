@@ -1,8 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  
+
   const navigate = useNavigate();
+  const {user} = useSelector((state)=>state.auth)
 
   return (
     <div
@@ -45,12 +49,19 @@ const Home = () => {
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={() => navigate("/allDoctors")}
+
+              {user.role ==="patient"?(
+   <button 
+                onClick={() =>  navigate("/allDoctors")}
                 className="px-7 py-3.5 rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]"
               >
                 Book Appointment
               </button>
+              ):""}
+
+                <button onClick={()=>{navigate("/createDoctor")}} className="px-7 py-3.5 cursor-pointer rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]">Create Doctor</button>
+          
+           
              
             </div>
 
