@@ -27,7 +27,7 @@ const CreateDoctor = () => {
       if (data.success) {
         console.log(data);
         toast.success(data.message);
-        navigate(`/apointmentForm/${data.doctor._id}`);
+        navigate(`/appointmentForm/${data.doctor._id}`);
       }
     } catch (err) {
       console.log(err.message);

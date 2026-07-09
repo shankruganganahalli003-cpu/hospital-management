@@ -11,6 +11,7 @@ import Contact from "./pages/Contact";
 import AllDoctors from "./pages/AllDoctors";
 import SlotBooking from "./pages/SlotBooking";
 import CreateDoctor from "./DoctorPages/CreateDoctor";
+import Appointment from "./DoctorPages/Appointment";
 
 const App = () => {
   return (
@@ -33,8 +34,10 @@ const App = () => {
          <Route path="/allDoctors" element={<AllDoctors/>}/>
         </Route>
 
-        <Route element={<ProtectedRoute allowedRoles={["patient"]}/>} >
+        <Route element={<ProtectedRoute allowedRoles={["doctor"]}/>} >
         <Route path="/createDoctor" element={<CreateDoctor/>}/>
+        <Route path="/appointmentForm/:doctorId" element={<Appointment/>}/>
+        
 
         </Route>
 

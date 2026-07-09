@@ -5,6 +5,7 @@ module.exports.create = async (req, res) => {
     const userId = req.userId;
     const doctorId = req.params.doctorId;
 
+
     const {
       durationMinutes,
       availableDays,
@@ -31,16 +32,22 @@ module.exports.create = async (req, res) => {
         return res.status(400).json({message:"Id not found"})
     }
 
-    const createAppointment = await appointmentmodel.create({
-      userId,
-      doctorId,
-      durationMinutes,
-      availableDays,
-      morningTime,
-      eveningTime,
-      amount,
-      notes: notes || "",
-    });
+    const existAppointment = await appointmentmodel.find({userId});
+
+    if(existAppointment){
+      return res.status(400).json({message:"Appointment already exist"});
+    }
+
+const createAppointment = await appointmentmodel.create({
+  userId,
+  doctorId,
+  durationMinutes,
+  availableDays,
+  morningTime,
+  eveningTime,
+  amount,
+  notes: notes || "",
+});
 
     return res.status(201).json({
       success: true,
