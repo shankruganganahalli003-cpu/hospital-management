@@ -51,7 +51,7 @@ exports.googleLogin = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Google Login successfull",
-      user,
+      user,jwtToken
     });
   } catch (err) {
     console.log("OAuth error:", err.message);

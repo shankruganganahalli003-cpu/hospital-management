@@ -6,7 +6,8 @@ const Home = () => {
   
 
   const navigate = useNavigate();
-  const {user} = useSelector((state)=>state.auth)
+const { user, appointmentId,doctorId } = useSelector((state) => state.auth);
+ 
 
   return (
     <div
@@ -26,6 +27,8 @@ const Home = () => {
               <span className="text-sm font-medium tracking-wide">
                 Online Doctor Appointment Booking
               </span>
+
+              
             </div>
 
             <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight">
@@ -55,11 +58,34 @@ const Home = () => {
                 onClick={() =>  navigate("/allDoctors")}
                 className="px-7 py-3.5 rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]"
               >
-                Book Appointment
+                Doctors
               </button>
               ):""}
 
-                <button onClick={()=>{navigate("/createDoctor")}} className="px-7 py-3.5 cursor-pointer rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]">Create Doctor</button>
+
+
+
+               {!doctorId ? (
+    <button
+      onClick={() => navigate("/createDoctor")}
+      className="px-7 py-3.5 cursor-pointer rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]"
+    >
+      Create Doctor
+    </button>
+  ) : !appointmentId && user.role=="doctor" ?(
+    <button
+      onClick={() => navigate(`/appointmentForm/${doctorId}`)}
+      className="px-10 py-3.5 cursor-pointer rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]"
+    >
+      Appointements
+    </button>
+  ):null}
+
+  {appointmentId&&(
+      <button onClick={()=>{navigate("/myPatients")}} className="px-10 py-3.5 cursor-pointer rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]">Patients </button>
+  )}
+
+                
           
            
              

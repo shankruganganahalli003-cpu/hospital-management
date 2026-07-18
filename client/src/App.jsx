@@ -12,6 +12,7 @@ import AllDoctors from "./pages/AllDoctors";
 import SlotBooking from "./pages/SlotBooking";
 import CreateDoctor from "./DoctorPages/CreateDoctor";
 import Appointment from "./DoctorPages/Appointment";
+import MyProfile from "./DoctorPages/MyProfile";
 
 const App = () => {
   return (
@@ -37,6 +38,8 @@ const App = () => {
         <Route element={<ProtectedRoute allowedRoles={["doctor"]}/>} >
         <Route path="/createDoctor" element={<CreateDoctor/>}/>
         <Route path="/appointmentForm/:doctorId" element={<Appointment/>}/>
+        <Route path="/myProfile/:appointmentId" element={<MyProfile/>}/>
+
         
 
         </Route>

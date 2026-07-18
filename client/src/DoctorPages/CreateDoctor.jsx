@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import api from "../api/axios";
+import { useDispatch } from "react-redux";
+import { setDoctorId } from "../redux/authSlice";
 
 const CreateDoctor = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     fullName: "",
     specialization: "",
@@ -27,7 +30,9 @@ const CreateDoctor = () => {
       if (data.success) {
         console.log(data);
         toast.success(data.message);
-        navigate(`/appointmentForm/${data.doctor._id}`);
+   dispatch(setDoctorId({ doctorId: data.doctor._id }));
+navigate(`/appointmentForm/${data.doctor._id}`);
+
       }
     } catch (err) {
       console.log(err.message);

@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import api from "../api/axios";
+import { useDispatch } from "react-redux";
+import { setAppointmentId } from "../redux/authSlice";
 
 const Appointment = () => {
   const { doctorId } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -33,8 +36,12 @@ const Appointment = () => {
 
       if (data.success) {
         toast.success(data.message || "Appointment created successfully");
-        console.log(data);
-        navigate(`/myProfile/${data._id}`);
+        dispatch(
+        setAppointmentId({
+          appointmentId: data.createAppointment._id,
+        })
+      );
+        navigate(`/myProfile/${data.createAppointment._id}`);
       } else {
         toast.error(data.message || "Something went wrong");
       }

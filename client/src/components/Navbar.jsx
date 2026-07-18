@@ -8,7 +8,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const { user } = useSelector((state) => state.auth);
+  const { user,appointmentId } = useSelector((state) => state.auth);
   const [menuOpen, setMenuOpen] = useState(false);
 
   if (location.pathname === "/login" || location.pathname === "/register") return null;
@@ -29,9 +29,8 @@ const commonLinks = [
 const doctorLinks = [
   { name: "Dashboard", path: "/doctor/dashboard" },
   { name: "Appointments", path: "/doctor/appointments" },
-  
+  ...(appointmentId ? [{ name: "My Profile", path: `/myProfile/${appointmentId}` }] : []),
 ];
-
 const patientLinks = [
   { name: "My Appointments", path: "/patient/appointments" },
   { name: "Doctors", path: "/allDoctors" },

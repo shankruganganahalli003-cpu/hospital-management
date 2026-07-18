@@ -92,9 +92,11 @@ const handleSubmit = async (e) => {
         { withCredentials: true }
       );
 
-      dispatch(setCredentials({ user: data.user }));
+      dispatch(setCredentials({ user: data.user,
+        token:data.jwtToken
+      }));
       toast.success(data.message || "Registration successful!");
-      navigate("/verify-email", { state: { email: form.email } });
+      navigate("/", { state: { email: form.email } });
     } catch (err) {
       toast.error(err.response?.data?.message || "Registration failed");
     } finally {

@@ -32,7 +32,9 @@ const Otpvarify = () => {
       });
 
       if (data.success) {
-        dispatch(setCredentials({ user: data.user }));
+        dispatch(setCredentials({ user: data.user ,
+          token:data.token
+        }));
         toast.success(data.message || "OTP verified");
         navigate("/");
       } else {
