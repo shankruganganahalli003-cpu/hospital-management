@@ -7,7 +7,7 @@ const Home = () => {
 
   const navigate = useNavigate();
 const { user, appointmentId,doctorId } = useSelector((state) => state.auth);
- 
+      const role = user?.role;
 
   return (
     <div
@@ -53,26 +53,26 @@ const { user, appointmentId,doctorId } = useSelector((state) => state.auth);
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
 
-              {user.role ==="patient"?(
+              { role ==="patient"? (
    <button 
                 onClick={() =>  navigate("/allDoctors")}
                 className="px-7 py-3.5 rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]"
               >
-                Doctors
+                Get Started
               </button>
-              ):""}
+              ):null}
 
 
 
 
-               {!doctorId ? (
+               {!doctorId && role=="doctor" ?  (
     <button
       onClick={() => navigate("/createDoctor")}
       className="px-7 py-3.5 cursor-pointer rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]"
     >
       Create Doctor
     </button>
-  ) : !appointmentId && user.role=="doctor" ?(
+  ) : !appointmentId && role=="doctor" ?(
     <button
       onClick={() => navigate(`/appointmentForm/${doctorId}`)}
       className="px-10 py-3.5 cursor-pointer rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]"
@@ -81,14 +81,12 @@ const { user, appointmentId,doctorId } = useSelector((state) => state.auth);
     </button>
   ):null}
 
-  {appointmentId&&(
+  {appointmentId && role=="doctor" ?(
       <button onClick={()=>{navigate("/myPatients")}} className="px-10 py-3.5 cursor-pointer rounded-2xl bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition shadow-xl shadow-cyan-500/25 hover:scale-[1.02]">Patients </button>
-  )}
+  ):null}
 
                 
-          
-           
-             
+        
             </div>
 
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
@@ -113,4 +111,4 @@ const { user, appointmentId,doctorId } = useSelector((state) => state.auth);
   );
 };
 
-export default Home;
+export default Home;  

@@ -1,6 +1,6 @@
-
 const doctormodel = require("../models/doctormodel");
-
+const appointmentmodel = require("../models/appointmentmodel");
+const mongoose = require("mongoose");
 module.exports.create = async (req, res) => {
   try {
     const userId = req.userId;
@@ -43,11 +43,11 @@ module.exports.create = async (req, res) => {
       image,
     });
 
- return res.status(201).json({
-  success: true,
-  message: "Doctor created successfully",
-  doctor,
-});
+    return res.status(201).json({
+      success: true,
+      message: "Doctor created successfully",
+      doctor,
+    });
   } catch (err) {
     console.log(err.message);
     return res.status(500).json({
@@ -57,14 +57,11 @@ module.exports.create = async (req, res) => {
   }
 };
 
-module.exports.getall = async (req,res)=>{
-    try {
-        
-        const getall = await doctormodel.find();
-        return res.json({success:true,getall});
-
-
-    } catch (err) {
+module.exports.getall = async (req, res) => {
+  try {
+    const getall = await doctormodel.find();
+    return res.json({ success: true, getall });
+  } catch (err) {
     console.log(err.message);
     return res.status(500).json({
       message: "Server error",
@@ -73,40 +70,41 @@ module.exports.getall = async (req,res)=>{
   }
 };
 
+module.exports.update = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { fullName, specialization, experience, feesPerConsultation, about, address, image } = req.body;
 
-module.exports.update = async (req,res)=>{
-    try {
-        const {id} = req.params;
-        const {fullName,specialization,experience,feesPerConsultation,about,address,image} = req.body;
+    const update = await doctormodel.findByIdAndUpdate(
+      id,
+      { fullName, specialization, experience, feesPerConsultation, about, address, image },
+      { new: true }
+    );
 
-        const update = await doctormodel.findByIdAndUpdate(id,{fullName,specialization,experience,feesPerConsultation,about,address,image},{new:true});
+    return res.json({ update });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
-        return res.json({update});
-    } catch (err) {
-        console.log(err.message);
-    }
-}
-
-
-module.exports.deletedoctor = async (req,res)=>{
-    try {
-
-        const {id} = req.params;
-        const deleteDoctor = await doctormodel.findByIdAndDelete(id);
-        return res.json({deleteDoctor});
-        
-    } catch (err) {
+module.exports.deletedoctor = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteDoctor = await doctormodel.findByIdAndDelete(id);
+    return res.json({ deleteDoctor });
+  } catch (err) {
     console.log(err.message);
     return res.status(500).json({
       message: "Server error",
       error: err.message,
     });
   }
-}
+};
+
 module.exports.getme = async (req, res) => {
   try {
     const userId = req.userId;
-    const getme = await doctormodel.find({ userId });
+    const getme = await doctormodel.findOne({ userId });
 
     if (!getme) {
       return res.status(404).json({
@@ -126,6 +124,42 @@ module.exports.getme = async (req, res) => {
       success: false,
       message: "Server error",
       error: err.message,
+    });
+  }
+};
+
+module.exports.fetchAppoitmentWithDoctorId = async (req, res) => {
+  try {
+    const { doctorId } = req.params;
+
+    const getone = await doctormodel.aggregate([
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(doctorId),
+        },
+      },
+      {
+        $lookup: {
+          from: "appointments",
+          localField: "appointmentId",
+          foreignField: "_id",
+          as: "appointment",
+        },
+      },
+      {
+        $unwind: {
+          path: "$appointment",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+    ]);
+
+    return res.status(200).json({ success: true, getone });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
     });
   }
 };

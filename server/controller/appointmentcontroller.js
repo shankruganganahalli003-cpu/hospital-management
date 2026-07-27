@@ -1,4 +1,5 @@
 const appointmentmodel = require("../models/appointmentmodel");
+const doctormodel = require("../models/doctormodel");
 
 module.exports.create = async (req, res) => {
   try {
@@ -27,12 +28,7 @@ module.exports.create = async (req, res) => {
       });
     }
 
-    if (!userId || !doctorId) {
-      return res.status(400).json({ success: false, message: "Id not found" });
-    }
-
     const existAppointment = await appointmentmodel.findOne({ userId });
-
     if (existAppointment) {
       return res.status(400).json({
         success: false,
@@ -51,10 +47,17 @@ module.exports.create = async (req, res) => {
       notes: notes || "",
     });
 
+    const updatedDoctor = await doctormodel.findOneAndUpdate(
+      { _id: doctorId },
+      { appointmentId: createAppointment._id },
+      { returnDocument: "after" }
+    );
+
     return res.status(201).json({
       success: true,
       message: "Appointment created successfully",
       createAppointment,
+      updatedDoctor,
     });
   } catch (err) {
     console.log(err.message);
@@ -66,18 +69,18 @@ module.exports.create = async (req, res) => {
   }
 };
 
-
 module.exports.getme = async (req, res) => {
   try {
     const { appointmentId } = req.params;
+    const userId = req.userId;
 
-    const {userId} = req.userId;
     const getme = await appointmentmodel.findById(appointmentId);
-    const doctor = await appointmentmodel.findOne(userId).populate("doctorId")
+    const doctor = await appointmentmodel.findOne({ userId }).populate("doctorId");
 
     return res.status(200).json({
       success: true,
-      getme,doctor
+      getme,
+      doctor,
     });
   } catch (err) {
     console.log(err.message);
