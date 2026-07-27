@@ -92,9 +92,12 @@ const handleSubmit = async (e) => {
         { withCredentials: true }
       );
 
-      dispatch(setCredentials({ user: data.user,
-        token:data.jwtToken
-      }));
+   dispatch(
+  setCredentials({
+    user: data.user,
+    token: data.token,
+  })
+);
       toast.success(data.message || "Registration successful!");
       navigate("/", { state: { email: form.email } });
     } catch (err) {

@@ -65,9 +65,12 @@ const Login = () => {
         { withCredentials: true }
       );
 
-      dispatch(setCredentials({ user: data.user ,
-        token:data.jwtToken
-      }));
+    dispatch(
+  setCredentials({
+    user: data.user,
+    token: data.token,
+  })
+);
       toast.success(data.message || "Login successful!");
       navigate("/");
     } catch (err) {
