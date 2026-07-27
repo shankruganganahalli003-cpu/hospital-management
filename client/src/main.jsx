@@ -11,7 +11,7 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
- <GoogleOAuthProvider clientId="951092080585-6d14sta7f7hq5nraif0t0rs780edacal.apps.googleusercontent.com">
+<GoogleOAuthProvider clientId="951092080585-mif0nvcjpo81jqbvsvomij7fcpa657fm.apps.googleusercontent.com">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
