@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://hospital-management-shz4.onrender.com",
+    origin: "https://hospital-management-2-rg9j.onrender.com",
     credentials: true,
   })
 );
