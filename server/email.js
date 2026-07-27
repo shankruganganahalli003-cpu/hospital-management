@@ -13,14 +13,20 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmail = async (email, subject, message) => {
-  return transporter.sendMail({
-    from: process.env.MY_EMAIL,
-    to: email,
-    subject,
-    text: message,
-  });
-};
+  try {
+    const info = await transporter.sendMail({
+      from: process.env.MY_EMAIL,
+      to: email,
+      subject,
+      text: message,
+    });
 
+    console.log(info);
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
 const generateOTP = () => {
   return crypto.randomInt(100000, 999999).toString();
 };
