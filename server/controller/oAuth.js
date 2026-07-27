@@ -11,14 +11,14 @@ exports.googleLogin = async (req, res) => {
     if (!token) {
       return res.status(400).json({ error: "Token missing" });
     }
-
+ console.log("Received token:", token);
     const ticket = await client.verifyIdToken({
       idToken: token,
       audience: process.env.GOOGLE_CLIENT_ID,
     });
 
     const payload = ticket.getPayload();
-
+   console.log("Google Payload:", payload);
     if (!payload?.email) {
       return res.status(401).json({ error: "Invalid Google token" });
     }
